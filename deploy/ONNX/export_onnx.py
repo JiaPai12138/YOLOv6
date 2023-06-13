@@ -101,7 +101,7 @@ if __name__ == '__main__':
     # ONNX export
     try:
         LOGGER.info('\nStarting to export ONNX...')
-        export_file = args.weights.replace('.pt', '.onnx')  # filename
+        export_file = args.weights.replace('.pt', f'_{args.img_size[0]}.onnx')  # filename
         with BytesIO() as f:
             torch.onnx.export(model, img, f, verbose=False, opset_version=13,
                               training=torch.onnx.TrainingMode.EVAL,
