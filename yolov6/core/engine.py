@@ -264,6 +264,10 @@ class Trainer:
                             )
 
         LOGGER.info(f"Epoch: {self.epoch} | mAP@0.5: {results[0]} | mAP@0.50:0.95: {results[1]}")
+
+        with open(osp.join(self.save_dir, 'results.txt'), '+a') as r:
+            r.write(f'Epoch: {self.epoch} | mAP@0.5: {results[0]} | mAP@0.50:0.95: {results[1]}\n')
+
         self.evaluate_results = results[:2]
         # plot validation predictions
         self.plot_val_pred(vis_outputs, vis_paths)
