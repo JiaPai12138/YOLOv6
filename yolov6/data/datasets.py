@@ -28,6 +28,7 @@ from .data_augment import (
     mixup,
     random_affine,
     mosaic_augmentation,
+    cutout,
 )
 from yolov6.utils.events import LOGGER
 
@@ -186,6 +187,9 @@ class TrainValDataset(Dataset):
 
         if self.augment:
             img, labels = self.general_augment(img, labels)
+
+            # Cutouts
+            # labels = cutout(img, labels, p=0.3)
 
         labels_out = torch.zeros((len(labels), 6))
         if len(labels):
